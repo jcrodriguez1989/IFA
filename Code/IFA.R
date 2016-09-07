@@ -72,8 +72,10 @@ IFA <- function(exprMatrix, classes, genesets=NULL, SEAcutoff=0.01, GSEAcutoff=0
     colnames(mgszRes)[-1] <- paste("GSEA", colnames(mgszRes)[-1], sep="_");
     
     ifaRes <- merge(deRes, mgszRes, by.x="setID", by.y="gene.sets", all=!F, suffixes=c("SEA","GSEA"));
+    
     ifaRes$setID <- as.character(ifaRes$setID);
     ifaRes$Name <- unlist(lapply(ifaRes$setID, Term));
+    colnames(ifaRes)[1] <- "gene.sets";
     return(ifaRes);
 }
 
